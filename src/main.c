@@ -10,7 +10,7 @@ int main()
 
     STATE_MACHINE_RETURN_VALUE res;
 
-    char* input_filename = "tests/at_simple_error_ok.txt";
+    char* input_filename = "tests/test_file_csq_ok.txt";
     FILE *input = fopen(input_filename, "rb");
     if(input == NULL)
         printf("COULD NOT OPEN %s\n", input_filename);

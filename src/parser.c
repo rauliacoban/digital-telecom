@@ -37,6 +37,7 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
                 state = 1;
                 data.line_count = 0;
                 col_cnt = 0;
+                data.ok = 1;
             }
             break;
         case 1: 
@@ -61,12 +62,15 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
             else if(crt_char == '+') // +
             {
                 state = 12;
+                data.line_count = 0;
+                col_cnt = 0;
+                data.data[data.line_count][col_cnt] = crt_char;
+                col_cnt++;
             }
             else
             {
                 ret = STATE_MACHINE_READY_WITH_ERROR;
             }
-            
             break;
         case 3:
             if(crt_char == 'K')
@@ -161,9 +165,11 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
             }
             break;
         case 12:
-            if(crt_char >= 32 && crt_char <= 126)
+            if(crt_char >= 'A' && crt_char <= 'Z')
             {
                 state = 13;
+                data.data[data.line_count][col_cnt] = crt_char;
+                col_cnt++;
             }
             else
             {
@@ -171,13 +177,17 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
             }
             break;
         case 13:
-            if(crt_char >= 32 && crt_char <= 126)
+            if(crt_char >= 'A' && crt_char <= 'Z')
             {
                 state = 13;
+                data.data[data.line_count][col_cnt] = crt_char;
+                col_cnt++;
             }
             else if(crt_char == ':')
             {
                 state = 14;
+                data.data[data.line_count][col_cnt] = crt_char;
+                col_cnt++;
             }
             else
             {
@@ -188,6 +198,8 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
             if(crt_char == ' ')
             {
                 state = 15;
+                data.data[data.line_count][col_cnt] = crt_char;
+                col_cnt++;
             }
             else
             {
@@ -198,6 +210,8 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
             if(crt_char >= 32 && crt_char <= 126)
             {
                 state = 16;
+                data.data[data.line_count][col_cnt] = crt_char;
+                col_cnt++;
             }
             else
             {
@@ -208,6 +222,8 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
             if(crt_char >= 32 && crt_char <= 126)
             {
                 state = 16;
+                data.data[data.line_count][col_cnt] = crt_char;
+                col_cnt++;
             }
             else if(crt_char == CR)
             {
@@ -222,6 +238,8 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
             if(crt_char == LF)
             {
                 state = 18;
+                data.data[data.line_count][col_cnt] = 0;
+                col_cnt++;
             }
             else
             {
@@ -236,6 +254,10 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
             else if(crt_char == '+')
             {
                 state = 12;
+                data.line_count++;
+                col_cnt = 0;
+                data.data[data.line_count][col_cnt] = crt_char;
+                col_cnt++;
             }
             else
             {
@@ -291,6 +313,16 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
         */
     }
 
-    printf("Exiting with state %i\n", state);
+    if(ret == STATE_MACHINE_READY_WITH_ERROR){
+        data.ok = 0;
+        data.data[data.line_count][col_cnt] = 0;
+        data.line_count++;
+    }
+    if(ret == STATE_MACHINE_READY_OK){
+        data.data[data.line_count][col_cnt] = 0;
+        data.line_count++;
+    }
+
+    printf("Exiting with state %i %s\n", state, data.data[data.line_count]);
     return ret;
 }

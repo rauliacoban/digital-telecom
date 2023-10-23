@@ -24,12 +24,15 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
     static uint8_t state = 0;
     static uint8_t col_cnt = 0;
 
-    printf("Parsing char with value %i with state %i\n", crt_char, state);
+    printf("#################################################\n");
+    printf("Parsing char with value %i %c with state %i\n", crt_char, crt_char, state);
+
+    STATE_MACHINE_RETURN_VALUE ret = STATE_MACHINE_NOT_READY;;
 
     switch(state) //reset to state 0 after the transmission 
     {
         case 0:
-            if(crt_char == 13) //CR
+            if(crt_char == CR) //CR
             {
                 state = 1;
                 data.line_count = 0;
@@ -37,14 +40,13 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
             }
             break;
         case 1: 
-           if(crt_char == 10) //LF
+            if(crt_char == 10) //LF
             {
                 state = 2;
-                return STATE_MACHINE_NOT_READY;
             }
             else
             {
-                return STATE_MACHINE_READY_WITH_ERROR;
+                ret = STATE_MACHINE_READY_WITH_ERROR;
             }
             break;
         case 2:
@@ -54,18 +56,216 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
             }
             else if(crt_char == 'E') // e
             {
-                
+                state = 6;
             }
             else if(crt_char == '+') // +
             {
-
+                state = 12;
             }
             else
             {
-                return STATE_MACHINE_READY_WITH_ERROR;
+                ret = STATE_MACHINE_READY_WITH_ERROR;
             }
             
             break;
+        case 3:
+            if(crt_char == 'K')
+            {
+                state = 4;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 4:
+            if(crt_char ==  CR)
+            {
+                state = 5;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 5:
+            if(crt_char ==  LF)
+            {
+                state = DONE_OK;
+                ret = STATE_MACHINE_READY_OK;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 6:
+            if(crt_char == 'R')
+            {
+                state = 7;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 7:
+            if(crt_char == 'R')
+            {
+                state = 8;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 8:
+            if(crt_char == 'O')
+            {
+                state = 9;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 9:
+            if(crt_char == 'R')
+            {
+                state = 10;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 10:
+            if(crt_char == CR)
+            {
+                state = 11;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 11:
+            if(crt_char == LF)
+            {
+                state = DONE_ERROR;
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 12:
+            if(crt_char >= 32 && crt_char <= 126)
+            {
+                state = 13;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 13:
+            if(crt_char >= 32 && crt_char <= 126)
+            {
+                state = 13;
+            }
+            else if(crt_char == ':')
+            {
+                state = 14;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 14:
+            if(crt_char == ' ')
+            {
+                state = 15;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 15:
+            if(crt_char >= 32 && crt_char <= 126)
+            {
+                state = 16;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 16:
+            if(crt_char >= 32 && crt_char <= 126)
+            {
+                state = 16;
+            }
+            else if(crt_char == CR)
+            {
+                state = 17;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 17:
+            if(crt_char == LF)
+            {
+                state = 18;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 18:
+            if(crt_char == CR)
+            {
+                state = 19;
+            }
+            else if(crt_char == '+')
+            {
+                state = 12;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 19:
+            if(crt_char == LF)
+            {
+                state = 20;
+            }
+            else
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        case 20:
+            if(crt_char == 'O')
+            {
+                state = 3;
+            }
+            else if(crt_char == 'E')
+            {
+                state = 6;
+            }
+            {
+                ret = STATE_MACHINE_READY_WITH_ERROR;
+            }
+            break;
+        /*
         //...
         //random number, will change 22 with nr from drawing
         case 22:
@@ -88,5 +288,9 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
                 return STATE_MACHINE_READY_WITH_ERROR;
             }
             break;
+        */
     }
+
+    printf("Exiting with state %i\n", state);
+    return ret;
 }

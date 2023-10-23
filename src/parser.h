@@ -3,7 +3,10 @@
 
 #include <stdint.h>
 
-
+#define CR 13
+#define LF 10
+#define DONE_OK 21
+#define DONE_ERROR 22
 #define AT_COMMAND_MAX_LINES 100
 #define AT_COMMAND_MAX_LINE_SIZE 128
 

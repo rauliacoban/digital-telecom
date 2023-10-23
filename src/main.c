@@ -8,11 +8,9 @@ int main()
 
     uint8_t test_char;
 
-    STATE_MACHINE_RETURN_VALUE res = at_command_parse(test_char);
+    STATE_MACHINE_RETURN_VALUE res;
 
-    printf("%s\n", getReturnValueString(res));
-
-    char* input_filename = "tests/short_file.txt";
+    char* input_filename = "tests/at_simple_error_ok.txt";
     FILE *input = fopen(input_filename, "rb");
     if(input == NULL)
         printf("COULD NOT OPEN %s\n", input_filename);
@@ -24,9 +22,13 @@ int main()
     rewind(input);  
 
     uint8_t buffer; 
-    for(int i = 0; i < filesize; i++) {
+    for(int i = 0; i < filesize; i++) 
+    {
         fread(&buffer, 1, 1, input); 
-        printf("|%c|", buffer);
+        //printf("|%c|", buffer);
+
+        res = at_command_parse(buffer);
+        //printf("%s\n", getReturnValueString(res));
     }
     printf("\n");
 

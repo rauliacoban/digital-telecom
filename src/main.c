@@ -10,6 +10,8 @@ int main()
 
     STATE_MACHINE_RETURN_VALUE res = at_command_parse(test_char);
 
+    printf("%s\n", getReturnValueString(res));
+
     /*
     open file
     while(!EOF)

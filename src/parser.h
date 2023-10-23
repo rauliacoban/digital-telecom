@@ -1,5 +1,5 @@
-#ifndef __PARSER_AT__ //start header guard
-#define __PARSER_AT__
+#ifndef PARSER_h //start header guard
+#define PARSER_h
 
 #include <stdint.h>
 
@@ -7,6 +7,10 @@
 #define AT_COMMAND_MAX_LINES 100
 #define AT_COMMAND_MAX_LINE_SIZE 128
 
+extern char* STR_NOT_READY;
+extern char* STR_READY_OK;
+extern char* STR_READY_WITH_ERROR;
+extern char* STR_UNKNOWN;
 typedef struct 
 {
     /* data */
@@ -26,5 +30,7 @@ typedef enum
 
 //function declaration 
 STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char);
+
+char* getReturnValueString(STATE_MACHINE_RETURN_VALUE val);
 
 #endif //end header guard

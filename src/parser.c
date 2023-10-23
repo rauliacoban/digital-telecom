@@ -3,6 +3,21 @@
 
 AT_COMMAND_DATA data;
 
+char* STR_NOT_READY = "NOT_READY";
+char* STR_READY_OK = "READY_OK";
+char* STR_READY_WITH_ERROR = "READY_WITH_ERROR";
+char* STR_UNKNOWN = "UNKOWN_STATE_THIS_SHOULD_NOT_HAPPEN";
+
+char* getReturnValueString(STATE_MACHINE_RETURN_VALUE val){
+    if(val == STATE_MACHINE_NOT_READY)
+        return STR_NOT_READY;
+    else if(val == STATE_MACHINE_READY_OK)
+        return STR_READY_OK;
+    else if(val == STATE_MACHINE_READY_WITH_ERROR)
+        return STR_READY_WITH_ERROR;
+    return STR_UNKNOWN;
+}
+
 //function definition
 STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
 {

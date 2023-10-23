@@ -21,9 +21,9 @@ int main()
 
     fseek(input, 0, SEEK_END);          
     size_t filesize = ftell(input);            
-    rewind(input);                      
-    uint8_t buffer; 
+    rewind(input);  
 
+    uint8_t buffer; 
     for(int i = 0; i < filesize; i++) {
         fread(&buffer, 1, 1, input); 
         printf("|%c|", buffer);
@@ -43,5 +43,7 @@ int main()
             "expected %c and got %c"
     
     }*/
+    
+    fclose(input);
     return 0;
 }

@@ -1,12 +1,11 @@
-// source file: 
-
 #include "parser.h"
- 
+
 AT_COMMAND_DATA data;
 
 //function definition
 STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
 {
+    
     static uint8_t state = 0;
     static uint8_t col_cnt = 0;
     switch(state) //reset to state 0 after the transmission 

@@ -320,7 +320,7 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
     }
     if(ret == STATE_MACHINE_READY_OK){
         data.data[data.line_count][col_cnt] = 0;
-        data.line_count++;
+        //data.line_count++;
     }
 
     printf("Exiting with state %i %s\n", state, data.data[data.line_count]);

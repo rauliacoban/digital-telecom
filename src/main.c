@@ -28,6 +28,13 @@ int main()
         //printf("|%c|", buffer);
 
         res = at_command_parse(buffer);
+
+        if(res == STATE_MACHINE_READY_OK){
+            printf("%s\n", getReturnValueString(res));
+            for(int j = 0; j < data.line_count; j++){
+                printf("|%s|\n", data.data[j]);
+            }
+        }
         //printf("%s\n", getReturnValueString(res));
     }
     printf("\n");

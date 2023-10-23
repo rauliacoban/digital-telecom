@@ -12,6 +12,24 @@ int main()
 
     printf("%s\n", getReturnValueString(res));
 
+    char* input_filename = "tests/short_file.txt";
+    FILE *input = fopen(input_filename, "rb");
+    if(input == NULL)
+        printf("COULD NOT OPEN %s\n", input_filename);
+    else
+        printf("OPENED %s\n", input_filename);
+
+    fseek(input, 0, SEEK_END);          
+    size_t filesize = ftell(input);            
+    rewind(input);                      
+    uint8_t buffer; 
+
+    for(int i = 0; i < filesize; i++) {
+        fread(&buffer, 1, 1, input); 
+        printf("|%c|", buffer);
+    }
+    printf("\n");
+
     /*
     open file
     while(!EOF)

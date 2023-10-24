@@ -2,13 +2,13 @@
 #include<stdio.h>
 #include "parser.h"
 
-int main()
+int main(int argc, char **argv)
 {
     printf("Merrydo how do you do\n");
-
-    uint8_t test_char;
-
-    STATE_MACHINE_RETURN_VALUE res;
+    printf("Running AT command parser with %i arguments. They are:\n", argc);
+    for(int i = 0; i < argc; i++){
+        printf("[%i] %s\n", i, argv[i]);
+    }
 
     char* input_filename = "tests/test_file_csq_ok.txt";
     FILE *input = fopen(input_filename, "rb");
@@ -27,7 +27,7 @@ int main()
         fread(&buffer, 1, 1, input); 
         //printf("|%c|", buffer);
 
-        res = at_command_parse(buffer);
+        STATE_MACHINE_RETURN_VALUE res = at_command_parse(buffer);
 
         if(res == STATE_MACHINE_READY_OK){
             printf("%s\n", getReturnValueString(res));

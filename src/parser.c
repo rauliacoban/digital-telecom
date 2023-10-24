@@ -287,30 +287,6 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
                 ret = STATE_MACHINE_READY_WITH_ERROR;
             }
             break;
-        /*
-        //...
-        //random number, will change 22 with nr from drawing
-        case 22:
-            if(crt_char >= 32 && crt_char <= 126) 
-            {   //change -1 with value
-                if(col_cnt < -1)
-                {
-                    data.data[data.line_count][col_cnt] = crt_char;
-                    col_cnt++;
-                }
-            }
-            else if(crt_char == 13) //CR
-            {
-                //increase line count or wait for +
-                col_cnt = 0;
-                //counter update with line width or set terminator
-            }
-            else
-            {
-                return STATE_MACHINE_READY_WITH_ERROR;
-            }
-            break;
-        */
     }
 
     if(ret == STATE_MACHINE_READY_WITH_ERROR){

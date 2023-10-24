@@ -24,8 +24,10 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
     static uint8_t state = 0;
     static uint8_t col_cnt = 0;
 
-    printf("#################################################\n");
-    printf("Parsing char with value %i %c with state %i\n", crt_char, crt_char, state);
+    #ifdef ENABLE_LOG
+        printf("#################################################\n");
+        printf("Parsing char with value %i %c with state %i\n", crt_char, crt_char, state);
+    #endif
 
     STATE_MACHINE_RETURN_VALUE ret = STATE_MACHINE_NOT_READY;;
 
@@ -299,6 +301,9 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
         //data.line_count++;
     }
 
+    #ifdef ENABLE_LOG
     printf("Exiting with state %i %s\n", state, data.data[data.line_count]);
+    #endif
+    
     return ret;
 }

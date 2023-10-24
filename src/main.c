@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include "parser.h"
 
-int main(int argc, char **argv)
+int main(const int argc, const char **argv)
 {
     printf("Merrydo how do you do\n");
     printf("Running AT command parser with %i arguments. They are:\n", argc);
@@ -10,49 +10,40 @@ int main(int argc, char **argv)
         printf("[%i] %s\n", i, argv[i]);
     }
 
-    char* input_filename = "tests/test_file_csq_ok.txt";
-    FILE *input = fopen(input_filename, "rb");
-    if(input == NULL)
-        printf("COULD NOT OPEN %s\n", input_filename);
-    else
-        printf("OPENED %s\n", input_filename);
+    for(int file_idx = 1; file_idx < argc; file_idx++){
+        const char* input_filename = argv[file_idx];
+        FILE *input = fopen(input_filename, "rb");
+        if(input == NULL)
+            printf("COULD NOT OPEN %s\n", input_filename);
+        else
+            printf("OPENED %s\n", input_filename);
 
-    fseek(input, 0, SEEK_END);          
-    size_t filesize = ftell(input);            
-    rewind(input);  
+        fseek(input, 0, SEEK_END);
+        size_t filesize = ftell(input);
+        rewind(input);
 
-    uint8_t buffer; 
-    for(int i = 0; i < filesize; i++) 
-    {
-        fread(&buffer, 1, 1, input); 
-        //printf("|%c|", buffer);
+        uint8_t buffer; 
+        for(int i = 0; i < filesize; i++) 
+        {
+            fread(&buffer, 1, 1, input); 
+            //printf("|%c|", buffer);
 
-        STATE_MACHINE_RETURN_VALUE res = at_command_parse(buffer);
+            STATE_MACHINE_RETURN_VALUE res = at_command_parse(buffer);
 
-        if(res == STATE_MACHINE_READY_OK){
-            printf("%s\n", getReturnValueString(res));
-            for(int j = 0; j < data.line_count; j++){
-                printf("|%s|\n", data.data[j]);
+            if(res == STATE_MACHINE_READY_OK){
+                printf("%s\n", getReturnValueString(res));
+                for(int j = 0; j < data.line_count; j++){
+                    printf("|%s|\n", data.data[j]);
+                }
             }
+            //printf("%s\n", getReturnValueString(res));
         }
-        //printf("%s\n", getReturnValueString(res));
+        printf("\n");
+        
+        fclose(input);
     }
-    printf("\n");
 
-    /*
-    open file
-    while(!EOF)
-    {
-        read char   
-        parser(char)
-        if( ready==ok)
-            print data
-        if(ready = error)
-            stop and print error message
-            "expected %c and got %c"
     
-    }*/
-    
-    fclose(input);
+
     return 0;
 }

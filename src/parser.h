@@ -10,6 +10,8 @@
 #define AT_COMMAND_MAX_LINES 100
 #define AT_COMMAND_MAX_LINE_SIZE 128
 
+//#define ENABLE_LOG
+
 extern char* STR_NOT_READY;
 extern char* STR_READY_OK;
 extern char* STR_READY_WITH_ERROR;

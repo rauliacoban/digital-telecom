@@ -19,7 +19,7 @@ char* getReturnValueString(STATE_MACHINE_RETURN_VALUE val){
 }
 
 //function definition
-STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
+STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
 {
     static uint8_t state = 0;
     static uint8_t col_cnt = 0;
@@ -30,6 +30,11 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
     #endif
 
     STATE_MACHINE_RETURN_VALUE ret = STATE_MACHINE_NOT_READY;;
+    if(state == 0){
+        data.ok = 1;
+        data.line_count = 0;
+        col_cnt = 0;
+    }
 
     switch(state) //reset to state 0 after the transmission 
     {
@@ -37,9 +42,6 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
             if(crt_char == CR) //CR
             {
                 state = 1;
-                data.line_count = 0;
-                col_cnt = 0;
-                data.ok = 1;
             }
             break;
         case 1: 
@@ -291,19 +293,22 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char )
             break;
     }
 
+    #ifdef ENABLE_LOG
+    printf("Exiting with state %i %s %s\n", state, data.data[data.line_count], getReturnValueString(ret));
+    #endif
+
     if(ret == STATE_MACHINE_READY_WITH_ERROR){
         data.ok = 0;
         data.data[data.line_count][col_cnt] = 0;
         data.line_count++;
+        state = 0;
     }
     if(ret == STATE_MACHINE_READY_OK){
+        data.ok = 1;
         data.data[data.line_count][col_cnt] = 0;
         //data.line_count++;
+        state = 0;
     }
 
-    #ifdef ENABLE_LOG
-    printf("Exiting with state %i %s\n", state, data.data[data.line_count]);
-    #endif
-    
     return ret;
 }

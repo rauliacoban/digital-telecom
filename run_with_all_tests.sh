@@ -1,7 +1,7 @@
 clear &&
+gcc ./src/main.c ./src/parser.c -o main &&
 cd tests &&
-gcc ../src/main.c ../src/parser.c -o main &&
-./main \
+../main \
 at_simple_error_ok.txt \
 test_file_csq_not_ok_1.txt \
 test_file_csq_not_ok_3.txt \

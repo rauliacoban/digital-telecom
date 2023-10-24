@@ -14,19 +14,22 @@ int main(const int argc, const char **argv)
     for(int file_idx = 1; file_idx < argc; file_idx++){
         const char* input_filename = argv[file_idx];
         char output_filename[100];
-
         strcpy(output_filename, "output/output_");
         strcat(output_filename, input_filename);
         
         FILE *input = fopen(input_filename, "rb");
-        if(input == NULL)
-            printf("COULD NOT OPEN %s\n", input_filename);
+        if(input == NULL){
+            printf("FAILED TO OPEN %s\n", input_filename);
+            return 1;
+        }
         else
             printf("OPENED %s\n", input_filename);
 
         FILE *output = fopen(output_filename, "wb");
-        if(output == NULL)
-            printf("COULD NOT OPEN %s\n", output_filename);
+        if(output == NULL){
+            printf("FAILED TO OPEN %s\n", input_filename);
+            return 2;
+        }
         else
             printf("OPENED %s\n", output_filename);
 

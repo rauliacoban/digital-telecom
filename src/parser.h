@@ -38,4 +38,6 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char);
 
 char* getReturnValueString(STATE_MACHINE_RETURN_VALUE val);
 
+char* getOKorERROR(STATE_MACHINE_RETURN_VALUE val);
+
 #endif //end header guard

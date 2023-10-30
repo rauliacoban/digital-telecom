@@ -41,26 +41,27 @@ int main(const int argc, const char **argv)
         size_t filesize = ftell(input);
         rewind(input);
 
-        printf("%i\n", filesize);
+        printf("%li\n", filesize);
 
         for(int i = 0; i < filesize; i++)
         {
             uint8_t buffer; 
             fread(&buffer, 1, 1, input); 
 
+            data.line_count = 0;
+            data.ok = 1;
             STATE_MACHINE_RETURN_VALUE res = at_command_parse(buffer);
 
             if(res == STATE_MACHINE_READY_OK)
             {
-                printf("%s\n", getReturnValueString(res));
+                fprintf(output, "%s, %i lines\n", getOKorERROR(res), data.line_count);
                 for(int j = 0; j < data.line_count; j++){
-                    printf("|%s|\n", data.data[j]);
+                    fprintf(output, "|%s|\n", data.data[j]);
                 }
             }
-            else if(res == STATE_MACHINE_READY_WITH_ERROR)
-            {
-                printf("%s\n", getReturnValueString(res));
-            } // else STATE_MACHINE_NOT_READY
+            else if(res == STATE_MACHINE_READY_WITH_ERROR){
+                fprintf(output, "%s\n", getOKorERROR(res));
+            }
             else
             {
                 //printf("%s\n", getReturnValueString(res));

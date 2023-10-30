@@ -8,6 +8,9 @@ char* STR_READY_OK = "READY_OK";
 char* STR_READY_WITH_ERROR = "READY_WITH_ERROR";
 char* STR_UNKNOWN = "UNKOWN_STATE_THIS_SHOULD_NOT_HAPPEN";
 
+char* STR_OK = "OK";
+char* STR_ERROR = "ERROR" ;
+
 char* getReturnValueString(STATE_MACHINE_RETURN_VALUE val){
     if(val == STATE_MACHINE_NOT_READY)
         return STR_NOT_READY;
@@ -15,6 +18,16 @@ char* getReturnValueString(STATE_MACHINE_RETURN_VALUE val){
         return STR_READY_OK;
     else if(val == STATE_MACHINE_READY_WITH_ERROR)
         return STR_READY_WITH_ERROR;
+    return STR_UNKNOWN;
+}
+
+char* getOKorERROR(STATE_MACHINE_RETURN_VALUE val){
+    if(val == STATE_MACHINE_NOT_READY)
+        return STR_UNKNOWN;
+    else if(val == STATE_MACHINE_READY_OK)
+        return STR_OK;
+    else if(val == STATE_MACHINE_READY_WITH_ERROR)
+        return STR_ERROR;
     return STR_UNKNOWN;
 }
 

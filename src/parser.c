@@ -316,6 +316,17 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
     printf("Exiting with state %i %s %s\n", state, data.data[data.line_count], getReturnValueString(ret));
     #endif
 
+    if(col_cnt == AT_COMMAND_MAX_LINE_SIZE){
+        printf("ERROR reached maximum number of characters per line. Resetting.\n");
+        col_cnt = 0;
+    }
+
+    if(data.line_count == AT_COMMAND_MAX_LINES){
+        printf("ERROR reached maximum number of lines. Resetting.\n");
+        data.line_count = 0;
+        col_cnt = 0;
+    }
+
     if(ret == STATE_MACHINE_READY_WITH_ERROR){
         data.ok = 0;
         data.data[data.line_count][col_cnt] = 0;

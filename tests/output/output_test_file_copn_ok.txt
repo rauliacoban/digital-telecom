@@ -1,84 +1,84 @@
 OK, 88 lines
-|+COPN: "36320", "DIGICEL"|
-|+COPN: "36301", "SETAR GSM"|
-|+COPN: "41201", "AF AWCC"|
-|+COPN: "41240", "MTN AF"|
-|+COPN: "41250", "Etisalat Af"|
-|+COPN: "41220", "ROSHAN"|
-|+COPN: "63102", "UNITEL"|
-|+COPN: "365840", "C&W"|
-|+COPN: "27603", "EAGLE AL"|
-|+COPN: "27601", "AMC - AL"|
-|+COPN: "27602", "vodafone AL"|
-|+COPN: "28301", "Beeline AM"|
-|+COPN: "21303", "STA-MOBILAND"|
-|+COPN: "36269", "ANT CURACAO TELECOM GSM"|
-|+COPN: "362951", "ANT"|
-|+COPN: "36251", "Telcell GSM"|
-|+COPN: "42403", "du"|
-|+COPN: "42402", "ETISALAT"|
-|+COPN: "722310", "CLARO ARGENTINA "|
-|+COPN: "72234", "AR PERSONAL"|
-|+COPN: "72207", "AR - Movistar"|
-|+COPN: "28305", "ARM MTS"|
-|+COPN: "544110", "Blue Sky Communications"|
-|+COPN: "344030", "APUA-PCS"|
-|+COPN: "34430", "APUA PCS ANTIGUA"|
-|+COPN: "344930", "Cingular"|
-|+COPN: "344920", "C&W"|
-|+COPN: "50506", "3TELSTRA"|
-|+COPN: "50502", "YES OPTUS"|
-|+COPN: "50501", "Telstra Mobile"|
-|+COPN: "50503", "vodafone AU"|
-|+COPN: "23210", "3 AT"|
-|+COPN: "23201", "A1"|
-|+COPN: "23205", "Orange AT"|
-|+COPN: "23212", "Orange AT"|
-|+COPN: "23207", "tele - ring"|
-|+COPN: "23203", "T-Mobile Austria"|
-|+COPN: "40001", "AZE - AZERCELL GSM"|
-|+COPN: "40004", "AZ Nar"|
-|+COPN: "40002", "BAKCELL GSM 2000"|
-|+COPN: "64202", "BDI TEMPO-AFRICELL"|
-|+COPN: "64201", "BDI ECONET"|
-|+COPN: "64207", "SMART"|
-|+COPN: "64203", "ONATEL BDI"|
-|+COPN: "64282", "TELECEL-BDI"|
-|+COPN: "20620", "BASE"|
-|+COPN: "20601", "BEL PROXIMUS"|
-|+COPN: "20610", "B Mobistar"|
-|+COPN: "61604", "BBCOM"|
-|+COPN: "61603", "MTN BENIN"|
-|+COPN: "61602", "TELECEL BENIN"|
-|+COPN: "61605", "GloBenin"|
-|+COPN: "61302", "BF Celtel"|
-|+COPN: "28401", "M-Tel BG"|
-|+COPN: "47002", "BGD AKTEL"|
-|+COPN: "47001", "grameenphone"|
-|+COPN: "47003", "Banglalink"|
-|+COPN: "47004", "BGD bMobile"|
-|+COPN: "47007", "WARID BD"|
-|+COPN: "28403", "vivatel"|
-|+COPN: "28405", "BG GLOBUL"|
-|+COPN: "42601", "BATELCO"|
-|+COPN: "42602", "zain BH"|
-|+COPN: "36439", "BaTelCell"|
-|+COPN: "21890", "BH GSMBIH"|
-|+COPN: "21803", "HT ERONET"|
-|+COPN: "21805", "m:tel"|
-|+COPN: "25704", "life:) BY"|
-|+COPN: "25701", "BY VELCOM"|
-|+COPN: "25702", "MTS BY"|
-|+COPN: "70267", "BTL"|
-|+COPN: "35002", "M3 WIRELESS"|
-|+COPN: "35000", "CellularOne "|
-|+COPN: "35010", "Cingular"|
-|+COPN: "73602", "BOMOV"|
-|+COPN: "73601", "VIVA"|
-|+COPN: "73603", "Telecel_Bolivia_GSM"|
-|+COPN: "72416", "BRA BrTCelular"|
-|+COPN: "72405", "Claro"|
-|+COPN: "72434", "CTBC"|
+|COPN: "311370", "GCI"|
+|+COPN: "310530", "West Virginia Wireless"|
+|+COPN: "31077", "Iowa Wireless USA"|
+|+COPN: "31032", "IT&E"|
+|+COPN: "310650", "Jasper"|
+|+COPN: "310870", "US"|
+|+COPN: "310690", "USA - Immix Wireless"|
+|+COPN: "311310", "Lamar Cellular"|
+|+COPN: "31190", "USASXLP"|
+|+COPN: "311330", "BTW"|
+|+COPN: "310570", "Chinook"|
+|+COPN: "31002", "NEP Wireless"|
+|+COPN: "31009", "NEP Wireless"|
+|+COPN: "311530", "USANCW"|
+|+COPN: "310450", "Cell One of NE Colorado"|
+|+COPN: "310330", "Cellular One"|
+|+COPN: "311170", "PetroCom"|
+|+COPN: "31180", "Pine Cellular"|
+|+COPN: "310320", "USA - CellularOne"|
+|+COPN: "311360", "Stelera Wireless"|
+|+COPN: "310270", "T-Mobile "|
+|+COPN: "310260", "T-Mobile "|
+|+COPN: "310490", "T-Mobile "|
+|+COPN: "31031", "T-Mobile "|
+|+COPN: "310250", "T-Mobile "|
+|+COPN: "310160", "T-Mobile "|
+|+COPN: "310660", "T-Mobile "|
+|+COPN: "310200", "T-Mobile "|
+|+COPN: "31026", "T-Mobile "|
+|+COPN: "310210", "T-Mobile "|
+|+COPN: "310220", "T-Mobile "|
+|+COPN: "310230", "T-Mobile "|
+|+COPN: "310240", "T-Mobile "|
+|+COPN: "31046", "USA SIMMETRY"|
+|+COPN: "310390", "Cell1ET"|
+|+COPN: "31020", "US - Union Telephone"|
+|+COPN: "310400", "USA  iCAN"|
+|+COPN: "310340", "USA 340"|
+|+COPN: "31101", "Wilkes USA"|
+|+COPN: "31105", "Wilkes USA"|
+|+COPN: "310890", "USA Unicel"|
+|+COPN: "310950", "USA XIT Wireless"|
+|+COPN: "43405", "UZB Ucell"|
+|+COPN: "43407", "UZB MTS"|
+|+COPN: "43404", "Beeline UZ"|
+|+COPN: "360110", "C&W"|
+|+COPN: "360070", "DIGICEL"|
+|+COPN: "36070", "DIGICEL"|
+|+COPN: "73401", "DIGITEL GSM"|
+|+COPN: "73402", "DIGITEL GSM"|
+|+COPN: "73403", "DIGITEL GSM"|
+|+COPN: "73404", "movistar"|
+|+COPN: "73406", "VE_MOVILNET"|
+|+COPN: "348170", "C&W"|
+|+COPN: "348570", "CCT Boatphone"|
+|+COPN: "45207", "Beeline VN"|
+|+COPN: "45205", "VN Vietnamobile"|
+|+COPN: "45204", "VNM and VIETTEL"|
+|+COPN: "45200", "MOBIFONE"|
+|+COPN: "45202", "VN VINAPHONE"|
+|+COPN: "45201", "VN MOBIFONE"|
+|+COPN: "54105", "DIGICEL"|
+|+COPN: "54101", "VUT SMILE"|
+|+COPN: "54927", "Samoatel GO"|
+|+COPN: "421700", "YemYY"|
+|+COPN: "42102", "MTN"|
+|+COPN: "42101", "SabaFon"|
+|+COPN: "65507", "Cell C"|
+|+COPN: "65510", "MTN-SA"|
+|+COPN: "65501", "VodaCom-SA"|
+|+COPN: "64501", "ZM CELTEL"|
+|+COPN: "64502", "MTN ZM"|
+|+COPN: "64804", "ZW ECONET"|
+|+COPN: "64801", "ZW NET*ONE"|
+|+COPN: "64803", "TELECEL ZW"|
+|+COPN: "311260", "SLO Cellular"|
+|+COPN: "51511", "ACeS"|
+|+COPN: "46668", "ACeS"|
+|+COPN: "51000", "ACeS"|
+|+COPN: "52020", "ACeS"|
 |+COPN: "90610", "MAURITEL"|
 |+COPN: "90105", "Thuraya"|
 |+COPN: "90106", "Thuraya"|

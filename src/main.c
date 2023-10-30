@@ -42,7 +42,6 @@ int main(const int argc, const char **argv)
         size_t filesize = ftell(input);
         rewind(input);
 
-        
         data.ok = 1;
         data.line_count = 0;
 

@@ -991,13 +991,15 @@ OK, 988 lines
 +COPN: "60910", "no name"
 +COPN: "28310", "no name"
 +COPN: "90121", "Seanet"
-ERROR
+ERROR, 0 lines
 OK, 1 lines
 +COPS: 0,0,"Vodafone RO",2
-ERROR
+ERROR, 1 lines
++COPS: 0,0,"Vodafone RO",2
 OK, 1 lines
 +CREG: 1,1
-ERROR
+ERROR, 1 lines
++CREG: 1,1
 OK, 988 lines
 +COPN: "36320", "DIGICEL"
 +COPN: "36301", "SETAR GSM"

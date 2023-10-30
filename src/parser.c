@@ -21,14 +21,11 @@ char* getReturnValueString(STATE_MACHINE_RETURN_VALUE val){
     return STR_UNKNOWN;
 }
 
-char* getOKorERROR(STATE_MACHINE_RETURN_VALUE val){
-    if(val == STATE_MACHINE_NOT_READY)
-        return STR_UNKNOWN;
-    else if(val == STATE_MACHINE_READY_OK)
+char* getOKorERROR(uint8_t ok){
+    if(ok)
         return STR_OK;
-    else if(val == STATE_MACHINE_READY_WITH_ERROR)
+    else 
         return STR_ERROR;
-    return STR_UNKNOWN;
 }
 
 //function definition
@@ -37,6 +34,7 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
     static uint8_t state = 0;
     static uint8_t col_cnt = 0;
     static uint8_t skipped_state_0 = 0;
+    static uint8_t read_lines = 1;
 
     #ifdef ENABLE_LOG
         printf("#################################################\n");
@@ -48,6 +46,7 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
         data.ok = 1;
         data.line_count = 0;
         col_cnt = 0;
+        read_lines = 1;
     }
 
     switch(state) //reset to state 0 after the transmission 
@@ -81,10 +80,12 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             else if(crt_char == '+') // +
             {
                 state = 12;
-                data.line_count = 0;
-                col_cnt = 0;
-                data.data[data.line_count][col_cnt] = crt_char;
-                col_cnt++;
+                if(read_lines){
+                    data.line_count = 0;
+                    col_cnt = 0;
+                    data.data[data.line_count][col_cnt] = crt_char;
+                    col_cnt++;
+                }
             }
             else
             {
@@ -115,6 +116,7 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             if(crt_char ==  LF)
             {
                 state = DONE_OK;
+                data.ok = 1;
                 ret = STATE_MACHINE_READY_OK;
             }
             else
@@ -176,7 +178,8 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             if(crt_char == LF)
             {
                 state = DONE_ERROR;
-                ret = STATE_MACHINE_READY_WITH_ERROR;
+                data.ok = 0;
+                ret = STATE_MACHINE_READY_OK;
             }
             else
             {
@@ -187,8 +190,10 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             if(crt_char >= 'A' && crt_char <= 'Z')
             {
                 state = 13;
-                data.data[data.line_count][col_cnt] = crt_char;
-                col_cnt++;
+                if(read_lines){
+                    data.data[data.line_count][col_cnt] = crt_char;
+                    col_cnt++;
+                }
             }
             else
             {
@@ -199,14 +204,18 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             if(crt_char >= 'A' && crt_char <= 'Z')
             {
                 state = 13;
-                data.data[data.line_count][col_cnt] = crt_char;
-                col_cnt++;
+                if(read_lines){
+                    data.data[data.line_count][col_cnt] = crt_char;
+                    col_cnt++;
+                }
             }
             else if(crt_char == ':')
             {
                 state = 14;
-                data.data[data.line_count][col_cnt] = crt_char;
-                col_cnt++;
+                if(read_lines){
+                    data.data[data.line_count][col_cnt] = crt_char;
+                    col_cnt++;
+                }
             }
             else
             {
@@ -217,8 +226,10 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             if(crt_char == ' ')
             {
                 state = 15;
-                data.data[data.line_count][col_cnt] = crt_char;
-                col_cnt++;
+                if(read_lines){
+                    data.data[data.line_count][col_cnt] = crt_char;
+                    col_cnt++;
+                }
             }
             else
             {
@@ -229,8 +240,10 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             if(crt_char >= 32 && crt_char <= 126)
             {
                 state = 16;
-                data.data[data.line_count][col_cnt] = crt_char;
-                col_cnt++;
+                if(read_lines){
+                    data.data[data.line_count][col_cnt] = crt_char;
+                    col_cnt++;
+                }
             }
             else
             {
@@ -241,8 +254,10 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             if(crt_char >= 32 && crt_char <= 126)
             {
                 state = 16;
-                data.data[data.line_count][col_cnt] = crt_char;
-                col_cnt++;
+                if(read_lines){
+                    data.data[data.line_count][col_cnt] = crt_char;
+                    col_cnt++;
+                }
             }
             else if(crt_char == CR)
             {
@@ -257,8 +272,10 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             if(crt_char == LF)
             {
                 state = 18;
-                data.data[data.line_count][col_cnt] = 0;
-                col_cnt++;
+                if(read_lines){
+                    data.data[data.line_count][col_cnt] = 0;
+                    col_cnt++;
+                }
             }
             else
             {
@@ -269,17 +286,21 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             if(crt_char == CR)
             {
                 state = 19;
-                data.data[data.line_count][col_cnt] = 0;
-                data.line_count++;
-                col_cnt = 0;
+                if(read_lines){
+                    data.data[data.line_count][col_cnt] = 0;
+                    data.line_count++;
+                    col_cnt = 0;
+                }
             }
             else if(crt_char == '+')
             {
                 state = 12;
+                if(read_lines){
                 data.line_count++;
-                col_cnt = 0;
-                data.data[data.line_count][col_cnt] = crt_char;
-                col_cnt++;
+                    col_cnt = 0;
+                    data.data[data.line_count][col_cnt] = crt_char;
+                    col_cnt++;
+                }
             }
             else
             {
@@ -325,9 +346,10 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
         printf("ERROR reached maximum number of lines. Resetting.\n");
         data.line_count = 0;
         col_cnt = 0;
+        read_lines = 0;
     }
 
-    if(ret == STATE_MACHINE_READY_WITH_ERROR){
+    if(ret == STATE_MACHINE_READY_WITH_ERROR){ //syntax error
         data.ok = 0;
         data.data[data.line_count][col_cnt] = 0;
         data.line_count++;
@@ -339,7 +361,6 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
         }
     }
     if(ret == STATE_MACHINE_READY_OK){
-        data.ok = 1;
         //data.data[data.line_count][col_cnt] = 0;
         //data.line_count++;
         state = 0;

@@ -56,7 +56,7 @@ int main(const int argc, const char **argv)
             {
                 fprintf(output, "%s, %i lines\n", getOKorERROR(res), data.line_count);
                 for(int j = 0; j < data.line_count; j++){
-                    fprintf(output, "|%s|\n", data.data[j]);
+                    fprintf(output, "%s\n", data.data[j]);
                 }
             }
             else if(res == STATE_MACHINE_READY_WITH_ERROR){

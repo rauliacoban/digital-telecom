@@ -300,6 +300,7 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             {
                 state = 6;
             }
+            else
             {
                 ret = STATE_MACHINE_READY_WITH_ERROR;
             }

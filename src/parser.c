@@ -42,7 +42,6 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
         printf("#################################################\n");
         printf("Parsing char with value %i %c with state %i\n", crt_char, crt_char, state);
     #endif
-    printf("************ %i\n", data.line_count);
 
     STATE_MACHINE_RETURN_VALUE ret = STATE_MACHINE_NOT_READY;;
     if(state == 0 || (state == 1 && skipped_state_0)){
@@ -270,11 +269,9 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             if(crt_char == CR)
             {
                 state = 19;
-                printf("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ %i\n", data.line_count);
                 data.data[data.line_count][col_cnt] = 0;
                 data.line_count++;
                 col_cnt = 0;
-                printf("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ %i\n", data.line_count);
             }
             else if(crt_char == '+')
             {
@@ -319,8 +316,6 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
     printf("Exiting with state %i %s %s\n", state, data.data[data.line_count], getReturnValueString(ret));
     #endif
 
-
-    printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ %i\n", data.line_count);
     if(ret == STATE_MACHINE_READY_WITH_ERROR){
         data.ok = 0;
         data.data[data.line_count][col_cnt] = 0;

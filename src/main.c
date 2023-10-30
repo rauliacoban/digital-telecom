@@ -11,6 +11,7 @@ int main(const int argc, const char **argv)
     {
         printf("[%i] %s\n", i, argv[i]);
     }
+    printf("\n");
 
     for(int file_idx = 1; file_idx < argc; file_idx++)
     {
@@ -35,13 +36,12 @@ int main(const int argc, const char **argv)
             return 2;
         }
         else
-            printf("OPENED %s\n\n\n\n\n", output_filename);
+            printf("OPENED %s\n", output_filename);
 
         fseek(input, 0, SEEK_END);
         size_t filesize = ftell(input);
         rewind(input);
 
-        printf("%li\n", filesize);
         
         data.ok = 1;
         data.line_count = 0;

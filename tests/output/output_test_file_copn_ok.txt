@@ -1,2 +1,89 @@
-ERROR
-ERROR
+OK, 88 lines
+|+COPN: "36320", "DIGICEL"|
+|+COPN: "36301", "SETAR GSM"|
+|+COPN: "41201", "AF AWCC"|
+|+COPN: "41240", "MTN AF"|
+|+COPN: "41250", "Etisalat Af"|
+|+COPN: "41220", "ROSHAN"|
+|+COPN: "63102", "UNITEL"|
+|+COPN: "365840", "C&W"|
+|+COPN: "27603", "EAGLE AL"|
+|+COPN: "27601", "AMC - AL"|
+|+COPN: "27602", "vodafone AL"|
+|+COPN: "28301", "Beeline AM"|
+|+COPN: "21303", "STA-MOBILAND"|
+|+COPN: "36269", "ANT CURACAO TELECOM GSM"|
+|+COPN: "362951", "ANT"|
+|+COPN: "36251", "Telcell GSM"|
+|+COPN: "42403", "du"|
+|+COPN: "42402", "ETISALAT"|
+|+COPN: "722310", "CLARO ARGENTINA "|
+|+COPN: "72234", "AR PERSONAL"|
+|+COPN: "72207", "AR - Movistar"|
+|+COPN: "28305", "ARM MTS"|
+|+COPN: "544110", "Blue Sky Communications"|
+|+COPN: "344030", "APUA-PCS"|
+|+COPN: "34430", "APUA PCS ANTIGUA"|
+|+COPN: "344930", "Cingular"|
+|+COPN: "344920", "C&W"|
+|+COPN: "50506", "3TELSTRA"|
+|+COPN: "50502", "YES OPTUS"|
+|+COPN: "50501", "Telstra Mobile"|
+|+COPN: "50503", "vodafone AU"|
+|+COPN: "23210", "3 AT"|
+|+COPN: "23201", "A1"|
+|+COPN: "23205", "Orange AT"|
+|+COPN: "23212", "Orange AT"|
+|+COPN: "23207", "tele - ring"|
+|+COPN: "23203", "T-Mobile Austria"|
+|+COPN: "40001", "AZE - AZERCELL GSM"|
+|+COPN: "40004", "AZ Nar"|
+|+COPN: "40002", "BAKCELL GSM 2000"|
+|+COPN: "64202", "BDI TEMPO-AFRICELL"|
+|+COPN: "64201", "BDI ECONET"|
+|+COPN: "64207", "SMART"|
+|+COPN: "64203", "ONATEL BDI"|
+|+COPN: "64282", "TELECEL-BDI"|
+|+COPN: "20620", "BASE"|
+|+COPN: "20601", "BEL PROXIMUS"|
+|+COPN: "20610", "B Mobistar"|
+|+COPN: "61604", "BBCOM"|
+|+COPN: "61603", "MTN BENIN"|
+|+COPN: "61602", "TELECEL BENIN"|
+|+COPN: "61605", "GloBenin"|
+|+COPN: "61302", "BF Celtel"|
+|+COPN: "28401", "M-Tel BG"|
+|+COPN: "47002", "BGD AKTEL"|
+|+COPN: "47001", "grameenphone"|
+|+COPN: "47003", "Banglalink"|
+|+COPN: "47004", "BGD bMobile"|
+|+COPN: "47007", "WARID BD"|
+|+COPN: "28403", "vivatel"|
+|+COPN: "28405", "BG GLOBUL"|
+|+COPN: "42601", "BATELCO"|
+|+COPN: "42602", "zain BH"|
+|+COPN: "36439", "BaTelCell"|
+|+COPN: "21890", "BH GSMBIH"|
+|+COPN: "21803", "HT ERONET"|
+|+COPN: "21805", "m:tel"|
+|+COPN: "25704", "life:) BY"|
+|+COPN: "25701", "BY VELCOM"|
+|+COPN: "25702", "MTS BY"|
+|+COPN: "70267", "BTL"|
+|+COPN: "35002", "M3 WIRELESS"|
+|+COPN: "35000", "CellularOne "|
+|+COPN: "35010", "Cingular"|
+|+COPN: "73602", "BOMOV"|
+|+COPN: "73601", "VIVA"|
+|+COPN: "73603", "Telecel_Bolivia_GSM"|
+|+COPN: "72416", "BRA BrTCelular"|
+|+COPN: "72405", "Claro"|
+|+COPN: "72434", "CTBC"|
+|+COPN: "90610", "MAURITEL"|
+|+COPN: "90105", "Thuraya"|
+|+COPN: "90106", "Thuraya"|
+|+COPN: "90114", "AeroMobile"|
+|+COPN: "90112", "MCP Maritime Com"|
+|+COPN: "60910", "no name"|
+|+COPN: "28310", "no name"|
+|+COPN: "90121", "Seanet"|

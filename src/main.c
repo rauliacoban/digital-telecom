@@ -35,21 +35,22 @@ int main(const int argc, const char **argv)
             return 2;
         }
         else
-            printf("OPENED %s\n", output_filename);
+            printf("OPENED %s\n\n\n\n\n", output_filename);
 
         fseek(input, 0, SEEK_END);
         size_t filesize = ftell(input);
         rewind(input);
 
         printf("%li\n", filesize);
+        
+        data.ok = 1;
+        data.line_count = 0;
 
         for(int i = 0; i < filesize; i++)
         {
             uint8_t buffer; 
             fread(&buffer, 1, 1, input); 
 
-            data.line_count = 0;
-            data.ok = 1;
             STATE_MACHINE_RETURN_VALUE res = at_command_parse(buffer);
 
             if(res == STATE_MACHINE_READY_OK)

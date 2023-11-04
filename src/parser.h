@@ -7,7 +7,7 @@
 #define LF 10
 #define DONE_OK 21
 #define DONE_ERROR 22
-#define AT_COMMAND_MAX_LINES 1000
+#define AT_COMMAND_MAX_LINES 100
 #define AT_COMMAND_MAX_LINE_SIZE 128
 
 //#define ENABLE_LOG

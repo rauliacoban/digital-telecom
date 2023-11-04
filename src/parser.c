@@ -296,7 +296,7 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             {
                 state = 12;
                 if(read_lines){
-                data.line_count++;
+                    data.line_count++;
                     col_cnt = 0;
                     data.data[data.line_count][col_cnt] = crt_char;
                     col_cnt++;
@@ -342,10 +342,8 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
         col_cnt = 0;
     }
 
-    if(data.line_count == AT_COMMAND_MAX_LINES){
+    if(data.line_count >= AT_COMMAND_MAX_LINES){
         printf("ERROR reached maximum number of lines. Resetting.\n");
-        data.line_count = 0;
-        col_cnt = 0;
         read_lines = 0;
     }
 

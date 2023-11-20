@@ -2,6 +2,7 @@
 #include<stdio.h>
 
 AT_COMMAND_DATA data;
+int ATYPICAL_CMD_FLAG = 0;
 
 char* STR_NOT_READY = "NOT_READY";
 char* STR_READY_OK = "READY_OK";
@@ -35,6 +36,9 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
     static uint8_t col_cnt = 0;
     static uint8_t skipped_state_0 = 0;
     static uint8_t read_lines = 1;
+    static uint8_t last_char = 0;
+    static uint8_t died_on_state_20 = 0;
+
 
     #ifdef ENABLE_LOG
         printf("#################################################\n");
@@ -42,11 +46,16 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
     #endif
 
     STATE_MACHINE_RETURN_VALUE ret = STATE_MACHINE_NOT_READY;;
-    if(state == 0 || (state == 1 && skipped_state_0)){
+    if(state == 0 || (state == 1 && skipped_state_0)|| (state == 2 && died_on_state_20)){
         data.ok = 1;
         data.line_count = 0;
         col_cnt = 0;
         read_lines = 1;
+        if(died_on_state_20){
+            data.data[data.line_count][col_cnt] = last_char;
+            col_cnt++;
+            last_char = 0;
+        }
     }
 
     switch(state) //reset to state 0 after the transmission 
@@ -69,28 +78,49 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             }
             break;
         case 2:
-            if(crt_char == 'O') //o
-            {
-                state = 3;
-            }
-            else if(crt_char == 'E') // e
-            {
-                state = 6;
-            }
-            else if(crt_char == '+') // +
-            {
-                state = 12;
-                if(read_lines){
-                    data.line_count = 0;
-                    col_cnt = 0;
-                    data.data[data.line_count][col_cnt] = crt_char;
-                    col_cnt++;
+            skipped_state_0 = 0;
+            if(ATYPICAL_CMD_FLAG){
+                printf("Atypical State 2\n");
+                if(crt_char >= 32 && crt_char <= 126)
+                {
+                    printf("Expected\n");
+                    state = 16;
+                    if(read_lines){
+                        data.data[data.line_count][col_cnt] = crt_char;
+                        col_cnt++;
+                    }
+                }
+                else
+                {
+                    printf("Error\n");
+                    ret = STATE_MACHINE_READY_WITH_ERROR;
                 }
             }
-            else
-            {
-                ret = STATE_MACHINE_READY_WITH_ERROR;
+            else{
+                if(crt_char == 'O') //o
+                {
+                    state = 3;
+                }
+                else if(crt_char == 'E') // e
+                {
+                    state = 6;
+                }
+                else if(crt_char == '+') // +
+                {
+                    state = 12;
+                    if(read_lines){
+                        data.line_count = 0;
+                        col_cnt = 0;
+                        data.data[data.line_count][col_cnt] = crt_char;
+                        col_cnt++;
+                    }
+                }
+                else
+                {
+                    ret = STATE_MACHINE_READY_WITH_ERROR;
+                }
             }
+            
             break;
         case 3:
             if(crt_char == 'K')
@@ -283,28 +313,48 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
             }
             break;
         case 18:
-            if(crt_char == CR)
-            {
-                state = 19;
-                if(read_lines){
-                    data.data[data.line_count][col_cnt] = 0;
-                    data.line_count++;
-                    col_cnt = 0;
+            if(ATYPICAL_CMD_FLAG){
+                printf("Atypical State 18\n");
+                if(crt_char == CR)
+                {
+                    printf("Expected\n");
+                    state = 19;
+                    if(read_lines){
+                        data.data[data.line_count][col_cnt] = 0;
+                        data.line_count++;
+                        col_cnt = 0;
+                    }
+                }
+                else
+                {
+                    printf("Error\n");
+                    ret = STATE_MACHINE_READY_WITH_ERROR;
                 }
             }
-            else if(crt_char == '+')
-            {
-                state = 12;
-                if(read_lines){
-                    data.line_count++;
-                    col_cnt = 0;
-                    data.data[data.line_count][col_cnt] = crt_char;
-                    col_cnt++;
+            else{
+                if(crt_char == CR)
+                {
+                    state = 19;
+                    if(read_lines){
+                        data.data[data.line_count][col_cnt] = 0;
+                        data.line_count++;
+                        col_cnt = 0;
+                    }
                 }
-            }
-            else
-            {
-                ret = STATE_MACHINE_READY_WITH_ERROR;
+                else if(crt_char == '+')
+                {
+                    state = 12;
+                    if(read_lines){
+                        data.line_count++;
+                        col_cnt = 0;
+                        data.data[data.line_count][col_cnt] = crt_char;
+                        col_cnt++;
+                    }
+                }
+                else
+                {
+                    ret = STATE_MACHINE_READY_WITH_ERROR;
+                }
             }
             break;
         case 19:
@@ -351,7 +401,13 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
         data.ok = 0;
         data.data[data.line_count][col_cnt] = 0;
         data.line_count++;
-        state = 0;
+        if(state == 20){
+            state = 2;
+            died_on_state_20 = 1;
+            last_char = crt_char;
+        }
+        else
+            state = 0;
 
         if(crt_char == CR){
             state = 1;

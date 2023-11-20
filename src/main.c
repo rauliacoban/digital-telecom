@@ -5,6 +5,8 @@
 
 int main(const int argc, const char **argv)
 {
+    ATYPICAL_CMD_FLAG = 1;
+
     printf("Merrydo how do you do\n");
     printf("Running AT command parser with %i arguments. They are:\n", argc);
     for(int i = 0; i < argc; i++)
@@ -60,7 +62,11 @@ int main(const int argc, const char **argv)
                 }
             }
             else if(res == STATE_MACHINE_READY_WITH_ERROR){
-                fprintf(output, "%s\n", getOKorERROR(res));
+                fprintf(output, "%s, %i lines\n", "SYNTAX_ERROR", data.line_count);
+                for(int j = 0; j < data.line_count; j++){
+                    fprintf(output, "%s\n", data.data[j]);
+                }
+                //fprintf(output, "%s\n", getOKorERROR(res));
             }
             else
             {

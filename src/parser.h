@@ -10,7 +10,7 @@
 #define AT_COMMAND_MAX_LINES 100
 #define AT_COMMAND_MAX_LINE_SIZE 128
 
-//#define ENABLE_LOG
+#define ENABLE_LOG
 
 extern char* STR_NOT_READY;
 extern char* STR_READY_OK;
@@ -25,6 +25,7 @@ typedef struct
 }AT_COMMAND_DATA;
 
 extern AT_COMMAND_DATA data;
+extern int ATYPICAL_CMD_FLAG;
 
 typedef enum
 {

@@ -338,12 +338,12 @@ STATE_MACHINE_RETURN_VALUE at_command_parse(uint8_t crt_char)
     #endif
 
     if(col_cnt == AT_COMMAND_MAX_LINE_SIZE){
-        printf("ERROR reached maximum number of characters per line. Resetting.\n");
+        //printf("ERROR reached maximum number of characters per line. Resetting.\n");
         col_cnt = 0;
     }
 
     if(data.line_count >= AT_COMMAND_MAX_LINES){
-        printf("ERROR reached maximum number of lines. Resetting.\n");
+        //printf("ERROR reached maximum number of lines. Resetting.\n");
         read_lines = 0;
     }
 

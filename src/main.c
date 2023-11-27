@@ -3,10 +3,22 @@
 #include "parser.h"
 #include<string.h>
 
+static const int flag_lines[] = {10, 14, 1027, 2022};
+static const num_flags = sizeof(flag_lines) / sizeof(int);
+int line_counter = 1;
+
+void isAtypical(){
+    for(int i = 0; i < num_flags; i++){
+        if(line_counter == flag_lines[i]){
+            ATYPICAL_CMD_FLAG = 1;
+            return;
+        }
+    }
+    ATYPICAL_CMD_FLAG = 0;
+}
+
 int main(const int argc, const char **argv)
 {
-    ATYPICAL_CMD_FLAG = 1;
-
     printf("Merrydo how do you do\n");
     printf("Running AT command parser with %i arguments. They are:\n", argc);
     for(int i = 0; i < argc; i++)
@@ -50,7 +62,8 @@ int main(const int argc, const char **argv)
         for(int i = 0; i < filesize; i++)
         {
             uint8_t buffer; 
-            fread(&buffer, 1, 1, input); 
+            fread(&buffer, 1, 1, input);
+            isAtypical();
 
             STATE_MACHINE_RETURN_VALUE res = at_command_parse(buffer);
 
@@ -71,6 +84,10 @@ int main(const int argc, const char **argv)
             else
             {
                 //printf("%s\n", getReturnValueString(res));
+            }
+            
+            if(buffer == LF){
+                line_counter++;
             }
         }
         printf("\n");

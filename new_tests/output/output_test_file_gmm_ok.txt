@@ -1,2 +1,5 @@
+SYNTAX_ERROR, 2 lines
+
+
 OK, 1 lines
 SIMCOM_SIM908
